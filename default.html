@@ -6,23 +6,26 @@
     div {
       margin: 6px;
     }
-    #command-textarea {
-      width: 280px;
-      height: 60px;
+    #toot-textarea {
+      width: 420px;
+      height: 30px;
     }
   </style>
   <script src="action.js"></script>
 </head>
 <body>
   <div>
-    <select id="service-menu">
-      <option value="growi">GROWI</option>
-      <option value="dropbox">Dropbox</option>
+    <select id="account-menu">
+      <option value="@relayctl@hashtag-relay.dtp-mstdn.jp">@relayctl@hashtag-relay.dtp-mstdn.jp</option>
     </select>
-    <button id="clip-button">clip!</button>
+    <select id="action-menu">
+      <option value="subscribe">subscribe</option>
+      <option value="unsubscribe">unsubscribe</option>
+    </select>
+    <button id="generate-button">generate!</button>
   </div>
   <div>
-    <textarea id="command-textarea"></textarea>
+    <textarea id="toot-textarea"></textarea>
   </div>
 </body>
 </html>

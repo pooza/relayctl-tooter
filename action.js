@@ -5,19 +5,26 @@ document.addEventListener('DOMContentLoaded', () => {
     return document.getElementById(id);
   }
 
-  const createBody = href => {
+  const createBody = tag => {
     return [
-      'command: ' + $('service-menu').value + '_clipping',
-      'url: ' + href,
-    ].join("\n");
+      $('account-menu').value,
+      $('action-menu').value,
+      '#' + decodeURIComponent(tag),
+    ].join(' ');
   }
 
-  $('clip-button').addEventListener('click', () => {
+  const pattern = /(\/web\/timelines\/tag|\/tags)\/([^/]+)/;
+
+  $('generate-button').addEventListener('click', () => {
     chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
       const tab = tabs.shift();
-      $('command-textarea').value = createBody(tab.url);
-      $('command-textarea').select();
-      document.execCommand('copy');
+      const url = new URL(tab.url);
+      const matches = url.pathname.match(pattern);
+      if (matches[2]) {
+        $('toot-textarea').value = createBody(matches[2]);
+        $('toot-textarea').select();
+        document.execCommand('copy');
+      }
     });
   })
 });
